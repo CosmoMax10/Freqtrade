@@ -17,6 +17,8 @@ import talib.abstract as ta
 import pandas_ta as pta
 import freqtrade.vendor.qtpylib.indicators as qtpylib
 
+import pandas_ta
+
 
 class BBandsRSI(IStrategy):
     """
@@ -40,7 +42,7 @@ class BBandsRSI(IStrategy):
     INTERFACE_VERSION = 3
 
     # Optimal timeframe for the strategy.
-    timeframe = '5m'
+    timeframe = '30m'
 
     # Can this strategy go short?
     can_short: bool = False
@@ -48,14 +50,12 @@ class BBandsRSI(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-        "60": 0.01,
-        "30": 0.02,
-        "0": 0.04
+        "0": 0.2
     }
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.10
+    stoploss = -0.15
 
     # Trailing stoploss
     trailing_stop = False
@@ -149,7 +149,9 @@ class BBandsRSI(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
      
         dataframe.loc[
-            (
+            (   
+                (dataframe['rsi'] < 30)&
+                (dataframe['close'] < dataframe['bb_lowerband']) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
             'enter_long'] = 1
@@ -170,7 +172,7 @@ class BBandsRSI(IStrategy):
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
      
         dataframe.loc[
-            (
+            (   (dataframe['rsi'] > 70)&
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
             'exit_long'] = 1
