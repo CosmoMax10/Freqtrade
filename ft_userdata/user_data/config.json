@@ -39,7 +39,20 @@
         "ccxt_async_config": {},
         "pair_whitelist": [
             "BTC/USDT",
-            "ETH/USDT"
+            "ETH/USDT",
+            "ALGO/USDT",
+            "ATOM/USDT",
+            "BAT/USDT",
+            "BCH/USDT",
+            "EOS/USDT",
+            "IOTA/USDT",
+            "LINK/USDT",
+            "LTC/USDT",
+            "NEO/USDT",
+            "XMR/USDT",
+            "XRP/USDT",
+            "XTZ/USDT",
+            "MATIC/USDT"
         ],
         "pair_blacklist": [
             "BNB/.*"
@@ -47,7 +60,7 @@
     },
     "pairlists": [
         {
-            "method": "StaticPairList",
+            "method": "VolumePairList",
             "number_assets": 20,
             "sort_key": "quoteVolume",
             "min_value": 0,
@@ -74,15 +87,15 @@
         "chat_id": "5495339298"
     },
     "api_server": {
-        "enabled": false,
+        "enabled": true,
         "listen_ip_address": "127.0.0.1",
         "listen_port": 8080,
         "verbosity": "error",
         "enable_openapi": false,
         "jwt_secret_key": "53e650c20a76ee368ff23694cd7fd2dafda66e9752c52631a5a3d1fbfa066604",
         "CORS_origins": [],
-        "username": "",
-        "password": ""
+        "username": "cosmomax10",
+        "password": "RTrobinson10"
     },
     "bot_name": "freqtrade",
     "initial_state": "running",

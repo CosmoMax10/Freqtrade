@@ -112,7 +112,7 @@ class Robin(IStrategy):
         """
         dataframe.loc[
             (
-                (dataframe['rsi'] < 30) &
+                (dataframe['rsi'] < 35) &
                 (dataframe['slowk'] < 20) &
                 (dataframe['bb_lowerband'] > dataframe['close']) &
                 (dataframe['CDLHAMMER'] == 100)
